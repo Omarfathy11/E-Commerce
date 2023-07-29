@@ -1,17 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404
 from .models import Product
 from django.core.paginator import Paginator
-# Create your views here.
+
 
 def product_list(request):
     product_list = Product.objects.all()
-    paginator = Paginator(product_list, 3)  # Show  contacts per page.
-    page = request.GET.get("page")
-    product_list = paginator.get_page(page)
-    context= {'product_list' : product_list }  #عشان يربطها باسمها الي في التيمبلت 
-    return render(request, 'product/product_list.html', context)
 
-def product_details(request, id):
-    product_details  = Product.objects.get(id=id)
-    context = {'product_details' : product_details}
-    return render(request, 'product/product_details.html', context)
+    paginator = Paginator(product_list, 2) 
+    page = request.GET.get('page')
+    product_list = paginator.get_page(page)
+
+    context = {'product_list' : product_list}
+    return render(request , 'Product/product_list.html' , context)
+
+
+
+def product_detail(request , slug):
+    # prodcut_detail = Product.objects.get(PRDSLug=slug)
+    prodcut_detail = get_object_or_404(Product , PRDSlug=slug)
+    context = {'prodcut_detail' : prodcut_detail}
+    return render(request , 'Product/product_detail.html' , context)

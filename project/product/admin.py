@@ -1,9 +1,11 @@
+from .models import Product, ProduectImage
 from django.contrib import admin
-from .models import Product, ProudectImage, Category, product_Alternative, product_Accessories
-# Register your models here.
+
+from product.models import ProduectImage , Category , product_Alternative, product_Accessories
+
+
 admin.site.register(Product)
-admin.site.register(ProudectImage)
+admin.site.register(ProduectImage)
 admin.site.register(Category)
 admin.site.register(product_Alternative)
 admin.site.register(product_Accessories)
-
